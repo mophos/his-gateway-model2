@@ -10,7 +10,7 @@ if ! [ "$(git remote -v)" ]; then
 fi
 
 ./load-cert.sh
-if [[ -d './hisgateway-docker-model2' && -f './hisgateway-docker-model2/docker-compose.yaml' ]]; then
+if [[ -d './hisgateway-docker-model2' && -f './hisgateway-docker-model2/docker-compose.yml' ]]; then
     git checkout -- .
     version_old=`cat ./script.version`
     git pull
