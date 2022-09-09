@@ -1,41 +1,44 @@
 option=$1
 if [[ $option =~ ^(help)$ || $option =~ ^(--help)$ ]]; then
-        echo "## Set config HIS-Gateway ##"
-        echo;
-        echo "usage: ./set-env.sh [--help] [--show] [--force]"
-        echo;
-        echo -e "help\t list about concept guides"
-        echo -e "show\t show config"
-        echo -e "force\t force set config"
-        exit 1
+    echo "## Set config HIS-Gateway ##"
+    echo
+    echo "usage: ./set-env.sh [--help] [--show] [--force]"
+    echo
+    echo -e "help\t list about concept guides"
+    echo -e "show\t show config"
+    echo -e "force\t force set config"
+    exit 1
 fi
 
 if [[ $option =~ ^(show)$ || $option =~ ^(--show)$ ]]; then
-        if  [ -f "./hisgateway-docker-model2/.env" ] ; then
-            cat ./hisgateway-docker-model2/.env
-        else
-            echo "No set config.Please ./set-env.sh"
-        fi
-        exit 1
+    if [ -f "./hisgateway-docker-model2/.env" ]; then
+        cat ./hisgateway-docker-model2/.env
+    else
+        echo "No set config.Please ./set-env.sh"
+    fi
+    exit 1
 fi
 
 if ! [ -d "./hisgateway-docker-model2" ]; then
     git clone https://github.com/mophos/hisgateway-docker-model2.git
 fi
-if ! [ -f "./hisgateway-docker-model2/.env" ]  || [[ $option =~ ^(set)$ ]] || [[ $option =~ ^(--force)$ ]]; then
+if ! [ -f "./hisgateway-docker-model2/.env" ] || [[ $option =~ ^(set)$ ]] || [[ $option =~ ^(--force)$ ]]; then
     if [ -f "./hisgateway-docker-model2/.env" ]; then
-        hospcode=`sed '/^HOSPCODE=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
-        group=`sed '/^GROUP=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
-        port=`sed '/^PORT=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
-        secretkey=`sed '/^SECRET_KEY=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
-        email=`sed '/^EMAIL_ICTPORTAL=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
-        password=`sed '/^PASSWORD=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
-        
+        hospcode=$(sed '/^HOSPCODE=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}')
+        group=$(sed '/^GROUP=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}')
+        port=$(sed '/^PORT=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}')
+        secretkey=$(sed '/^SECRET_KEY=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}')
+        email=$(sed '/^EMAIL_ICTPORTAL=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}')
+        password=$(sed '/^PASSWORD=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}')
+
     else
         hospcode="12345"
         group="1"
         port="80"
-        secretkey="$(echo $(date +%s) | md5sum | head -c 20; echo;)"
+        secretkey="$(
+            echo $(date +%s) | md5sum | head -c 20
+            echo
+        )"
         email=""
         password=""
     fi
@@ -54,12 +57,11 @@ if ! [ -f "./hisgateway-docker-model2/.env" ]  || [[ $option =~ ^(set)$ ]] || [[
     # echo 'ตั้งค่า Password ict portal'
     # read -p 'Password: ' PASSWORD_ICTPORTAL
 
-    HOSPCODE="${HOSPCODE:=`echo $hospcode`}"
-    GROUP="${GROUP:=`echo $group`}"
-    PORT="${PORT:=`echo $port`}"
-    SECRET_KEY="${SECRET_KEY:=`echo $secretkey`}"
-    EMAIL_ICTPORTAL="${EMAIL_ICTPORTAL:=`echo $email`}"
-
+    HOSPCODE="${HOSPCODE:=$(echo $hospcode)}"
+    GROUP="${GROUP:=$(echo $group)}"
+    PORT="${PORT:=$(echo $port)}"
+    SECRET_KEY="${SECRET_KEY:=$(echo $secretkey)}"
+    EMAIL_ICTPORTAL="${EMAIL_ICTPORTAL:=$(echo $email)}"
 
     cat <<EOF >./hisgateway-docker-model2/.env
 # แก้ไข 'xxxxx' ให้เป็น รหัสโรงพยาบาล
@@ -74,7 +76,7 @@ PASSWORD=${password}
 # ตั้งค่า 'port' สำหรับเปิดเว็บ
 PORT=${PORT}
 
-# path ที่เก็บไฟล์ cert แนะนำให้เอาไว้นอกโฟวเดอร์ hisgateway-docker
+# path ที่เก็บไฟล์ cert แนะนำให้เอาไว้นอกโฟวเดอร์ hisgateway-docker-model2
 PATH_CERT=../cert
 
 PATH_DATA=../data
@@ -88,7 +90,7 @@ SECRET_KEY=${SECRET_KEY}
 EMAIL_ICTPORTAL=${EMAIL_ICTPORTAL}
 
 EOF
-echo;
+    echo
 # echo "Please Open firewall for open website."
 # echo;
 # echo "Ex. \tfirewall-cmd --permanent --add-port=${PORT}/tcp"

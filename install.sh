@@ -1,7 +1,7 @@
 option=$1
 set -e
 if [[ $option =~ ^(help)$ || $option =~ ^(--help)$ ]]; then
-    echo "## Install his-gateway-model2 ##"
+    echo "## Install HIS-Gateway ##"
     echo "install.sh for centOS7,CentOS8,Ubuntu.  Other please Manual Install git,docker,docker-compose"
     echo
     echo "usage: ./install.sh [--help]"
