@@ -89,8 +89,8 @@ if [ "$(uname -a | grep el7)" ] || [ "$(uname -a | grep el8)" ] || [ "$(uname -a
         sudo chmod +x /usr/local/bin/docker-compose
     fi
 
-    if ! [ -d "./hisgateway-docker" ]; then
-        echo 'git clone hisgateway-docker'
+    if ! [ -d "./hisgateway-docker-model2" ]; then
+        echo 'git clone hisgateway-docker-model2'
         git clone https://github.com/mophos/hisgateway-docker-model2
     fi
 
