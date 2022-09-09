@@ -18,7 +18,7 @@ if [ "$(uname -a | grep el7)" ] || [ "$(uname -a | grep el8)" ] || [ "$(uname -a
             cd ..
             mv -r his-gateway-model2 his-gateway-no-git
             git clone https://github.com/mophos/his-gateway-model2.git
-            cd his-gateway
+            cd his-gateway-model2
         fi
 
         # if ! [ -x "$(command -v python)" ]; then
@@ -43,7 +43,7 @@ if [ "$(uname -a | grep el7)" ] || [ "$(uname -a | grep el8)" ] || [ "$(uname -a
             cd ..
             mv -r his-gateway-model2 his-gateway-no-git
             git clone https://github.com/mophos/his-gateway-model2.git
-            cd his-gateway
+            cd his-gateway-model2
         fi
 
         # if ! [ -x "$(command -v python3)" ]; then
@@ -65,7 +65,7 @@ if [ "$(uname -a | grep el7)" ] || [ "$(uname -a | grep el8)" ] || [ "$(uname -a
             cd ..
             mv -r his-gateway-model2 his-gateway-no-git
             git clone https://github.com/mophos/his-gateway-model2.git
-            cd his-gateway
+            cd his-gateway-model2
         fi
 
         # if ! [ -x "$(command -v python)" ]; then
