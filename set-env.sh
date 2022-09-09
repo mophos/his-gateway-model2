@@ -11,25 +11,25 @@ if [[ $option =~ ^(help)$ || $option =~ ^(--help)$ ]]; then
 fi
 
 if [[ $option =~ ^(show)$ || $option =~ ^(--show)$ ]]; then
-        if  [ -f "./hisgateway-docker/.env" ] ; then
-            cat ./hisgateway-docker/.env
+        if  [ -f "./hisgateway-docker-model2/.env" ] ; then
+            cat ./hisgateway-docker-model2/.env
         else
             echo "No set config.Please ./set-env.sh"
         fi
         exit 1
 fi
 
-if ! [ -d "./hisgateway-docker" ]; then
-    git clone https://github.com/mophos/hisgateway-docker.git
+if ! [ -d "./hisgateway-docker-model2" ]; then
+    git clone https://github.com/mophos/hisgateway-docker-model2.git
 fi
-if ! [ -f "./hisgateway-docker/.env" ]  || [[ $option =~ ^(set)$ ]] || [[ $option =~ ^(--force)$ ]]; then
-    if [ -f "./hisgateway-docker/.env" ]; then
-        hospcode=`sed '/^HOSPCODE=/!d;' hisgateway-docker/.env | awk -F '=' '{print $2}'`
-        group=`sed '/^GROUP=/!d;' hisgateway-docker/.env | awk -F '=' '{print $2}'`
-        port=`sed '/^PORT=/!d;' hisgateway-docker/.env | awk -F '=' '{print $2}'`
-        secretkey=`sed '/^SECRET_KEY=/!d;' hisgateway-docker/.env | awk -F '=' '{print $2}'`
-        email=`sed '/^EMAIL_ICTPORTAL=/!d;' hisgateway-docker/.env | awk -F '=' '{print $2}'`
-        password=`sed '/^PASSWORD=/!d;' hisgateway-docker/.env | awk -F '=' '{print $2}'`
+if ! [ -f "./hisgateway-docker-model2/.env" ]  || [[ $option =~ ^(set)$ ]] || [[ $option =~ ^(--force)$ ]]; then
+    if [ -f "./hisgateway-docker-model2/.env" ]; then
+        hospcode=`sed '/^HOSPCODE=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
+        group=`sed '/^GROUP=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
+        port=`sed '/^PORT=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
+        secretkey=`sed '/^SECRET_KEY=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
+        email=`sed '/^EMAIL_ICTPORTAL=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
+        password=`sed '/^PASSWORD=/!d;' hisgateway-docker-model2/.env | awk -F '=' '{print $2}'`
         
     else
         hospcode="12345"
@@ -61,7 +61,7 @@ if ! [ -f "./hisgateway-docker/.env" ]  || [[ $option =~ ^(set)$ ]] || [[ $optio
     EMAIL_ICTPORTAL="${EMAIL_ICTPORTAL:=`echo $email`}"
 
 
-    cat <<EOF >./hisgateway-docker/.env
+    cat <<EOF >./hisgateway-docker-model2/.env
 # แก้ไข 'xxxxx' ให้เป็น รหัสโรงพยาบาล
 HOSPCODE=${HOSPCODE}
 

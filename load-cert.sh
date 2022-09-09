@@ -1,6 +1,6 @@
 echo 'Start Download Certificate...'
 option=$1
-if [[ -d "./hisgateway-docker"  &&  -f "./hisgateway-docker/.env" ]]; then
+if [[ -d "./hisgateway-docker-model2"  &&  -f "./hisgateway-docker-model2/.env" ]]; then
   if  [ "$(uname -a | grep el7)" ]; then
      if ! [ -x "$(command -v curl)" ]; then 
       yum install curl -y
@@ -30,7 +30,7 @@ if [[ -d "./hisgateway-docker"  &&  -f "./hisgateway-docker/.env" ]]; then
   if [[ $option =~ ^(--force)$ ]]; then
     rm -rf ./cert/version
   fi
-  set -o allexport; source "./hisgateway-docker/.env"; set +o allexport
+  set -o allexport; source "./hisgateway-docker-model2/.env"; set +o allexport
   if [ -f "./cert/version" ]; then
       version=`cat ./cert/version`
       loadtype="1"
@@ -89,7 +89,7 @@ if [[ -d "./hisgateway-docker"  &&  -f "./hisgateway-docker/.env" ]]; then
           unzip cert.zip -d cert/
           rm -rf cert.zip
           password=`cat cert/password*`
-          sed -i -e "s/PASSWORD=.*/PASSWORD=$password/g" "./hisgateway-docker/.env"
+          sed -i -e "s/PASSWORD=.*/PASSWORD=$password/g" "./hisgateway-docker-model2/.env"
         else
           echo '######################';
           echo 'Login failed';

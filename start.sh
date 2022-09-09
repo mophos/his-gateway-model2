@@ -17,13 +17,13 @@ if ! [[ $option =~ ^(help)$ || $option =~ ^(--help)$ || $option =~ ^(--only)$ ||
 fi
 if [  "$(docker ps -a)" ]; then
 
-    if [[ -d "./hisgateway-docker" && -f "./hisgateway-docker/.env"  ]]; then
+    if [[ -d "./hisgateway-docker-model2" && -f "./hisgateway-docker-model2/.env"  ]]; then
         if [[ $option =~ ^(--only)$ && -f "./cert/version" ]]; then
-            cd hisgateway-docker
-            docker-compose  up -d
+            cd hisgateway-docker-model2
+            docker-compose up -d
         else
             ./update.sh   
-            # docker-compose  up -d
+            # docker-compose up -d
         fi
     else
     echo 'Please confit ENV  ./set-env.sh'
