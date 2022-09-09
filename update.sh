@@ -5,7 +5,7 @@ if ! [ "$(git remote -v)" ]; then
     git clone https://github.com/mophos/his-gateway-model2.git
     cp -r his-gateway-no-git/cert ./his-gateway-model2/.
     cp -r his-gateway-no-git/data ./his-gateway-model2/.
-    cp -r his-gateway-no-git/hisgateway-docker ./his-gateway-model2/.
+    cp -r his-gateway-no-git/hisgateway-docker-model2 ./his-gateway-model2/.
     cd his-gateway-model2
 fi
 
